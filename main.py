@@ -11,9 +11,15 @@ def menu():
         main()
 
 def taskController():
+    countdown(20)
+    answer = "answer"
+    choice = "empty string"
     print("This is a task")
-    pass
-
+    choice = input("Solution to the task is?: ")
+    if choice == answer:
+        print("Correct")
+    else:
+        print("Wrong loser!")
 def countdown(seconds):
     total_time = float(seconds)
     interval = 0.01  # update every 10 ms
@@ -29,7 +35,6 @@ def countdown(seconds):
     print("00.000\nTime’s up!")
 
 def main():
-    countdown(5)
-
+    taskController()
 
 menu()
