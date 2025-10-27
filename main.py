@@ -1,5 +1,19 @@
 import time
 
+print("test")
+def menu():
+    choice = "empty string"
+    print("Welcome to TimeBomb")
+    print("This game will test your abillity to complete different task in a short amout of time ")
+    print("Complete all task before the bomb explodes, GOOD LUCK!")
+    choice = input("Enter 1 to start the game: ")
+    if choice == "1":
+        main()
+
+def taskController():
+    print("This is a task")
+    pass
+
 def countdown(seconds):
     total_time = float(seconds)
     interval = 0.01  # update every 10 ms
@@ -14,6 +28,8 @@ def countdown(seconds):
 
     print("00.000\nTime’s up!")
 
+def main():
+    countdown(5)
 
-countdown(5)
 
+menu()
