@@ -114,9 +114,10 @@ def task_controller_curses(stdscr):
         task = choice(TASK_FUNCTIONS)
         result = task(task_win)
         if result:
-            task_win.addstr("\nRätt!\n")
+            task_win.addstr("\nRätt!\n", curses.color_pair(1))
         else:
-            task_win.addstr("\nFel! Bomben exploderade!\nSpelet är slut. Tryck valfri tangent för att avsluta.\n")
+            task_win.addstr("\nFel! Bomben exploderade!", curses.color_pair(2))
+            task_win.addstr("\nSpelet är slut. Tryck valfri tangent för att avsluta.\n")
             task_win.refresh()
             GAME_ACTIVE = False
             return
@@ -133,6 +134,10 @@ def task_controller_curses(stdscr):
     time.sleep(2)
 
 def main_curses(stdscr):
+    curses.start_color()
+    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Grön text
+    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)    # Röd text
+
     global GAME_ACTIVE, POINTS
     curses.curs_set(0)
     stdscr.clear()
