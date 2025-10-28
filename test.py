@@ -10,16 +10,15 @@ POINTS = 0
 TASKS_TO_SOLVE = 5
 lock = threading.Lock()
 
-
 # ==============================
 #        TIMER FUNKTION
 # ==============================
 def countdown_curses(stdscr, seconds):
-    """Visar en nedräkningstimer i eget curses-fönster."""
     global GAME_ACTIVE
+    time.sleep(5)
     start_time = time.perf_counter()
     end_time = start_time + seconds
-
+    
     with lock:
         timer_win = curses.newwin(1, 40, 0, 0)
         timer_win.nodelay(True)
@@ -43,13 +42,8 @@ def countdown_curses(stdscr, seconds):
     GAME_ACTIVE = False
     with lock:
         timer_win.erase()
-        timer_win.addstr(0, 0, "00.000 - 💥 BOMB EXPLODED!")
+        timer_win.addstr(0, 0, "00.000 - BOMB EXPLODED!")
         timer_win.refresh()
-
-
-# ==============================
-#        UPPGIFTER
-# ==============================
 
 def compare(correct, answer):
     global POINTS
@@ -57,7 +51,6 @@ def compare(correct, answer):
         POINTS += 1
         return True
     return False
-
 
 def math_task(win):
     a = randint(1, 9)
@@ -72,7 +65,6 @@ def math_task(win):
     curses.noecho()
 
     return compare(correct, answer)
-
 
 def symbol_task(win):
     symbols = ["×", "&", "^"]
@@ -148,10 +140,9 @@ TASK_FUNCTIONS = [math_task, word_task, symbol_task, alphabet_task]
 #        TASK CONTROLLER
 # ==============================
 def taskController_curses(stdscr):
-    """Visar uppgifter och kontrollerar resultat."""
     global GAME_ACTIVE, POINTS
 
-    time.sleep(0.8)  # vänta lite så timern hinner starta
+    time.sleep(5) 
 
     with lock:
         task_win = curses.newwin(22, 100, 3, 0)
@@ -172,9 +163,9 @@ def taskController_curses(stdscr):
 
         with lock:
             if result:
-                task_win.addstr("\n✅ Rätt!\n")
+                task_win.addstr("\nRätt!\n")
             else:
-                task_win.addstr("\n❌ Fel!\n")
+                task_win.addstr("\nFel!\n")
             task_win.refresh()
 
         time.sleep(1)
@@ -182,9 +173,9 @@ def taskController_curses(stdscr):
     with lock:
         if GAME_ACTIVE and POINTS >= TASKS_TO_SOLVE:
             GAME_ACTIVE = False
-            task_win.addstr("\n💥 Alla uppdrag klara! Bomben är desarmerad! 💣\n")
+            task_win.addstr("\n Alla uppdrag klara! Bomben är desarmerad! \n")
         elif GAME_ACTIVE:
-            task_win.addstr("\n😬 Du hann inte klart innan bomben exploderade!\n")
+            task_win.addstr("\n Du hann inte klart innan bomben exploderade!\n")
         task_win.refresh()
 
     time.sleep(2)
@@ -198,7 +189,7 @@ def main_curses(stdscr):
     stdscr.clear()
 
     with lock:
-        stdscr.addstr(2, 0, "💣 Välkommen till TimeBomb!")
+        stdscr.addstr(2, 0, "Välkommen till TimeBomb!")
         stdscr.addstr(3, 0, "Du har 20 sekunder på dig att lösa 5 uppdrag.")
         stdscr.addstr(4, 0, "Tryck Enter efter varje svar.")
         stdscr.refresh()
