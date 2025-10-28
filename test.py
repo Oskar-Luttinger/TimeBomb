@@ -140,7 +140,7 @@ def main_curses(stdscr):
     stdscr.addstr(3, 0, f"Du har 30 sekunder på dig att lösa {TASKS_TO_SOLVE} uppdrag.")
     stdscr.addstr(4, 0, "Tryck Enter efter varje svar.")
     stdscr.refresh()
-    time.sleep(1)
+    time.sleep(3)
     t1 = threading.Thread(target=countdown_curses, args=(stdscr, 30,))
     t2 = threading.Thread(target=task_controller_curses, args=(stdscr,))
     t1.start()
