@@ -96,6 +96,11 @@ def countdown_curses(stdscr, seconds):
         timer_win.refresh()
         time.sleep(0.05)
 
+    timer_win.erase()
+    timer_win.addstr(0, 0, "BOMB DESARMERAD!")
+    timer_win.refresh()
+
+
 def task_controller_curses(stdscr):
     global GAME_ACTIVE, POINTS
     task_win = curses.newwin(22, 100, 3, 0)
@@ -118,7 +123,9 @@ def task_controller_curses(stdscr):
         task_win.refresh()
         time.sleep(1)
     if GAME_ACTIVE and POINTS >= TASKS_TO_SOLVE:
+        GAME_ACTIVE = False
         task_win.addstr("\nAlla uppdrag klara! Bomben är desarmerad!\n")
+        task_win.refresh()
     elif GAME_ACTIVE:
         task_win.addstr("\nDu hann inte klart innan bomben exploderade!\n")
     task_win.addstr("\nSpelet är slut. Tryck valfri tangent för att avsluta.")
