@@ -7,7 +7,7 @@ from random import randint, choice
 
 GAME_ACTIVE = True
 POINTS = 0
-TASKS_TO_SOLVE = 4
+TASKS_TO_SOLVE = 5
 lock = threading.Lock()
 
 def get_input(win, prompt, upper=False):
@@ -17,7 +17,7 @@ def get_input(win, prompt, upper=False):
     answer = win.getstr().decode().strip()
     curses.noecho()
     return answer.upper() if upper else answer
-
+#Hjej
 def compare(correct, answer):
     global POINTS
     if correct == answer:
